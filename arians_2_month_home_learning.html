@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arian's 2-Month Core Learning Plan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#172033; --muted:#667085; --line:#e4e7ec; --paper:#fff; --bg:#f5f7fb; --navy:#173b57; --teal:#0f766e; --gold:#c47b13; --red:#b42318; --soft-blue:#eaf3f8; --soft-green:#e9f7f2; --soft-gold:#fff7e6; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { background:var(--bg); color:var(--ink); font-family:'Inter','Noto Sans Bengali',sans-serif; line-height:1.6; padding:28px 34px; }
+    .shell { max-width:1450px; margin:auto; }
+    .hero { background:var(--navy); color:#fff; padding:30px 34px; border-radius:14px 14px 0 0; display:flex; justify-content:space-between; gap:24px; align-items:flex-end; }
+    .eyebrow { color:#a9d9d0; font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:6px; }
+    h1 { font-size:32px; line-height:1.2; margin-bottom:8px; }
+    .hero p { color:#dbe9ed; max-width:720px; font-size:14px; }
+    .hero-meta { text-align:right; font-size:13px; color:#dbe9ed; white-space:nowrap; }
+    .hero-meta strong { display:block; color:#fff; font-size:18px; }
+    .content { background:var(--paper); border:1px solid var(--line); border-top:0; padding:28px 34px 40px; border-radius:0 0 14px 14px; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:12px; align-items:end; padding:16px; background:#f8fafc; border:1px solid var(--line); border-radius:9px; margin-bottom:22px; }
+    .zoom-controls { display:flex; align-items:center; gap:5px; margin-left:auto; }
+    .zoom-controls button { min-width:38px; padding:6px 10px; }
+    #zoomValue { min-width:48px; text-align:center; color:var(--muted); font-size:12px; font-weight:800; }
+    label { display:flex; flex-direction:column; gap:5px; font-size:12px; color:var(--muted); font-weight:700; }
+    input, select, button { font:inherit; }
+    input[type="date"], select { background:#fff; border:1px solid #cbd5e1; border-radius:6px; color:var(--ink); min-height:38px; padding:6px 10px; }
+    button { border:0; border-radius:6px; cursor:pointer; min-height:38px; padding:7px 15px; font-weight:700; }
+    .btn-primary { background:var(--teal); color:#fff; } .btn-secondary { background:#fff; color:var(--navy); border:1px solid #b8c4cc; } .btn-danger { color:var(--red); background:#fff; border:1px solid #f0b4ae; }
+    .summary { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px; }
+    .metric { border:1px solid var(--line); border-left:4px solid var(--teal); border-radius:8px; padding:15px 17px; background:#fff; }
+    .metric:nth-child(2) { border-left-color:var(--gold); } .metric:nth-child(3) { border-left-color:#3578b5; } .metric:nth-child(4) { border-left-color:#7c5aaa; }
+    .metric-number { font-size:28px; font-weight:800; line-height:1.1; } .metric-label { color:var(--muted); font-size:12px; margin-top:5px; }
+    .section-head { display:flex; justify-content:space-between; gap:16px; align-items:end; margin:28px 0 12px; border-bottom:2px solid #edf1f4; padding-bottom:10px; }
+    h2 { color:var(--navy); font-size:19px; } .section-head p { color:var(--muted); font-size:12px; }
+    .plan-note { display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:12px; margin-bottom:22px; }
+    .note { padding:13px 15px; border-radius:8px; font-size:13px; border:1px solid var(--line); } .note strong { display:block; margin-bottom:3px; }
+    .note.blue { background:var(--soft-blue); } .note.green { background:var(--soft-green); } .note.gold { background:var(--soft-gold); }
+    .table-wrap { overflow:auto; border:1px solid var(--line); border-radius:8px; }
+    table { width:100%; min-width:1060px; border-collapse:collapse; font-size:13px; } th { background:var(--navy); color:#fff; padding:11px 12px; text-align:left; font-size:11px; letter-spacing:.3px; white-space:nowrap; } td { padding:12px; border-bottom:1px solid var(--line); vertical-align:top; } tbody tr:nth-child(even) { background:#fbfcfd; } tbody tr.done { background:#f0faf6; } tbody tr.today { box-shadow:inset 4px 0 var(--gold); }
+    .week-cell { color:var(--navy); font-weight:800; white-space:nowrap; } .day-cell { white-space:nowrap; color:var(--muted); font-weight:700; } .subject { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:800; white-space:nowrap; } .bn { background:#fee4e2; color:#9b2c23; } .en { background:#e4effb; color:#245b8d; } .skill { background:#eee9fb; color:#65439a; }
+    .goal { min-width:235px; } .activity { min-width:270px; } .practice { min-width:205px; color:#475467; } .status-select { min-width:118px; }
+    .status-select.complete { background:#e9f7f2; color:#06705f; border-color:#8bd3c1; } .status-select.partial { background:#fff7e6; color:#8b5c0b; border-color:#edc979; }
+    .report { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; } .report-card { min-height:150px; border:1px solid var(--line); border-radius:8px; padding:16px; background:#fff; } .report-card h3 { font-size:14px; color:var(--navy); margin-bottom:8px; } .report-card p { color:var(--muted); font-size:13px; } .report-list { list-style:none; color:#475467; font-size:13px; } .report-list li { padding:3px 0; }
+    .empty { text-align:center; padding:32px; color:var(--muted); }
+    .mobile-plan { display:none; }
+    .mobile-row { border:1px solid var(--line); border-radius:9px; background:#fff; margin-bottom:9px; overflow:hidden; }
+    .mobile-row[open] { border-color:#9ccfc3; box-shadow:0 3px 10px rgba(23,59,87,.08); }
+    .mobile-row summary { display:grid; grid-template-columns:54px minmax(0,1fr) auto; gap:9px; align-items:center; cursor:pointer; list-style:none; padding:12px; }
+    .mobile-row summary::-webkit-details-marker { display:none; }
+    .mobile-row summary::after { content:'+'; color:var(--teal); font-size:20px; font-weight:400; }
+    .mobile-row[open] summary::after { content:'−'; }
+    .mobile-day { color:var(--muted); font-size:11px; font-weight:800; }
+    .mobile-goal { min-width:0; font-size:13px; font-weight:800; color:var(--navy); }
+    .mobile-goal small { display:block; color:var(--muted); font-size:11px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .mobile-details { border-top:1px solid var(--line); padding:12px; display:grid; gap:10px; font-size:13px; }
+    .mobile-detail-label { color:var(--muted); display:block; font-size:11px; font-weight:800; margin-bottom:2px; }
+    .mobile-status { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .mobile-status select { min-height:36px; }
+    body.mobile-mode { min-width:0; padding:12px; }
+    body.mobile-mode .shell { min-width:0; max-width:620px; }
+    body.mobile-mode .hero { display:block; padding:22px; }
+    body.mobile-mode .hero-meta { text-align:left; margin-top:14px; }
+    body.mobile-mode .content { padding:18px 14px 28px; }
+    body.mobile-mode .toolbar { display:grid; grid-template-columns:1fr 1fr; align-items:end; }
+    body.mobile-mode .toolbar > label { min-width:0; }
+    body.mobile-mode .toolbar > button { width:100%; }
+    body.mobile-mode .zoom-controls { grid-column:1 / -1; margin:0; justify-content:center; }
+    body.mobile-mode .summary { grid-template-columns:repeat(2,1fr); }
+    body.mobile-mode .plan-note, body.mobile-mode .report { grid-template-columns:1fr; }
+    body.mobile-mode .table-wrap { display:none; }
+    body.mobile-mode .mobile-plan { display:block; }
+    body.mobile-mode .section-head { align-items:start; }
+    @media (max-width:850px) { body { min-width:1240px; padding:12px; overflow-x:auto; } .shell { min-width:1180px; } .hero { min-height:160px; } .content { padding:18px 24px 28px; } .summary { grid-template-columns:repeat(4,1fr); } .plan-note, .report { grid-template-columns:1.3fr 1fr 1fr; } }
+    @media (max-width:850px) { body.mobile-mode { min-width:0; overflow-x:hidden; } body.mobile-mode .shell { min-width:0; } }
+    @media print { body { padding:0; background:#fff; } .hero { border-radius:0; } .content { border:0; } .toolbar, .report, .no-print { display:none !important; } .table-wrap { overflow:visible; } table { min-width:0; font-size:10px; } th, td { padding:6px; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">Home Learning Project 02 · 8 Weeks</div>
+        <h1>Arian's Core Reading Plan</h1>
+        <p>বয়স: ৫ বছর ৩ মাস · লক্ষ্য: বাংলা ও ইংরেজির core reading foundation, মনোযোগ, বলা ও ছোট লিখিত কাজ। এই plan private teacher-এর সঙ্গে follow করার জন্য তৈরি।</p>
+      </div>
+      <div class="hero-meta"><strong>২ মাসের পরিকল্পনা</strong><span id="dateRange">তারিখ সেট করুন</span></div>
+    </header>
+
+    <section class="content">
+      <div class="toolbar no-print">
+        <label>শুরু তারিখ<input id="startDate" type="date"></label>
+        <label>রিপোর্ট সময়<select id="reportFilter"><option value="all">সব দিনের plan</option><option value="daily">দৈনিক report</option><option value="weekly">সাপ্তাহিক report</option><option value="monthly">মাসিক report</option></select></label>
+        <label id="reportDateLabel" hidden>দিন<input id="reportDate" type="date"></label>
+        <label id="weekFilterLabel" hidden>সপ্তাহ<select id="weekFilter"><option value="0">Week 1</option><option value="1">Week 2</option><option value="2">Week 3</option><option value="3">Week 4</option><option value="4">Week 5</option><option value="5">Week 6</option><option value="6">Week 7</option><option value="7">Week 8</option></select></label>
+        <label>বিষয়<select id="subjectFilter"><option value="all">সব বিষয়</option><option value="বাংলা">বাংলা</option><option value="ইংরেজি">English</option><option value="দক্ষতা">Core skill</option></select></label>
+        <button class="btn-primary" onclick="applyFilters()">ফিল্টার করুন</button>
+        <button class="btn-secondary" id="viewToggle" onclick="toggleView()">Mobile app view</button>
+        <button class="btn-primary" onclick="syncWithGoogleSheet()">Google Sheet-এ save</button>
+        <button class="btn-secondary" onclick="window.print()">প্রিন্ট রিপোর্ট</button>
+        <button class="btn-danger" onclick="resetProgress()">সব progress reset</button>
+        <div class="zoom-controls no-print"><button class="btn-secondary" onclick="changeZoom(-0.1)" aria-label="Zoom out">−</button><span id="zoomValue">100%</span><button class="btn-secondary" onclick="changeZoom(0.1)" aria-label="Zoom in">+</button></div>
+      </div>
+      <div id="syncMessage" class="note green no-print" hidden></div>
+
+      <div class="summary">
+        <div class="metric"><div class="metric-number" id="plannedCount">40</div><div class="metric-label">মোট daily lesson</div></div>
+        <div class="metric"><div class="metric-number" id="completeCount">0</div><div class="metric-label">সম্পন্ন lesson</div></div>
+        <div class="metric"><div class="metric-number" id="readingCount">0%</div><div class="metric-label">reading goal progress</div></div>
+        <div class="metric"><div class="metric-number" id="weekCount">0/8</div><div class="metric-label">সপ্তাহের অগ্রগতি</div></div>
+      </div>
+
+      <div class="plan-note">
+        <div class="note blue"><strong>Teacher-এর নিয়ম</strong>প্রতিদিন ২৫–৩০ মিনিট। ভুল হলে বকা নয়; model করে আবার বলতে দিন। lesson শেষ হলে status mark করুন।</div>
+        <div class="note green"><strong>বাসার নিয়ম</strong>প্রতিদিন ১০ মিনিট read-aloud + ৫ মিনিট picture talk। চাপ নয়, ধারাবাহিকতা মূল লক্ষ্য।</div>
+        <div class="note gold"><strong>Mastery rule</strong>একদিনে না পারলে একই skill পরের দিন ৫ মিনিট revise করে তারপর নতুন কাজে যান।</div>
+      </div>
+
+      <div class="section-head"><div><h2>৮ সপ্তাহের নির্দিষ্ট daily plan</h2><p>তারিখ শুরু করলে প্রতিটি lesson-এর date নিজে তৈরি হবে।</p></div><p id="visibleCount"></p></div>
+      <div class="table-wrap"><table><thead><tr><th>Week / Day</th><th>Date</th><th>বিষয়</th><th>আজকের লক্ষ্য</th><th>Teacher activity</th><th>Home practice</th><th>Status</th></tr></thead><tbody id="planBody"></tbody></table></div>
+      <div class="mobile-plan" id="mobilePlan" aria-label="Mobile lesson list"></div>
+
+      <div class="section-head"><div><h2>Auto report</h2><p id="reportTitle">সমস্ত plan-এর summary</p></div></div>
+      <div class="report">
+        <div class="report-card"><h3>এই সময়ের ফলাফল</h3><ul class="report-list" id="resultList"></ul></div>
+        <div class="report-card"><h3>Reading milestone</h3><p id="milestoneText"></p></div>
+        <div class="report-card"><h3>পরের lesson-এর focus</h3><p id="nextFocus"></p></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const GOOGLE_APPS_SCRIPT_URL = 'PASTE_YOUR_SECOND_PROJECT_WEB_APP_URL_HERE';
+    const plan = [
+      ['বাংলা','স্বরবর্ণ চিনতে পারা','অ-ঔ card দেখিয়ে বলা, matching ও tracing','৫টি স্বরবর্ণ দেখে বলা'],
+      ['ইংরেজি','A-Z letter recognition','Capital letter card, sound ও picture match','A-F বলা ও খাতায় ১ লাইন'],
+      ['দক্ষতা','শোনা ও নির্দেশ মানা','দুই ধাপের instruction: নাও, রাখো; বলো, দেখাও','একটি গল্প শুনে ৩টি প্রশ্নের উত্তর'],
+      ['বাংলা','স্বরবর্ণের sound ও শব্দ','অ-আ-ই-ঈ দিয়ে ছবি/শব্দ match','৪টি ছবি দেখে প্রথম sound বলা'],
+      ['ইংরেজি','A-F phonics sound','প্রতিটি letter-এর sound, না যে শুধু নাম','A-F sound দিয়ে ৬টি ছবি sort'],
+      ['দক্ষতা','Fine-motor ও pencil control','লাইন, curve, circle এবং left-to-right practice','৫ মিনিট tracing, চাপ ছাড়া'],
+      ['বাংলা','ব্যঞ্জনবর্ণের প্রথম group','ক-ঙ চেনা, বলা, tracing','ক-ঙ একবার করে লেখা'],
+      ['ইংরেজি','G-L recognition ও sound','G-L card, sound এবং picture match','G-L বলা ও ৩টি sound practice'],
+      ['দক্ষতা','ছবি দেখে বলা','কে/কি/কোথায় প্রশ্নে ৩-৫ শব্দের উত্তর','একটি ছবি নিয়ে ৫টি বাক্য বলা'],
+      ['বাংলা','ক-ঙ দিয়ে ছোট শব্দ','কলম, কমল, গান-এর মতো সহজ শব্দ শুনে match','২টি শব্দ পড়ে/ভেঙে বলা'],
+      ['ইংরেজি','A-F CVC readiness','ছবি ও sound দিয়ে at, an, am-এর oral blending','a-m, a-t sound জোড়া দেওয়া'],
+      ['দক্ষতা','মনোযোগ ও memory','৩টি object দেখে ঢেকে recall করা','বাড়িতে ৩ object memory game'],
+      ['বাংলা','চ-ঞ group ও কার পরিচয়','চ-ঞ চেনা; আ-কারের sound শুনে বলা','চ-ঞ tracing ও ৩টি শব্দ বলা'],
+      ['ইংরেজি','M-R recognition ও sound','M-R letter/sound card এবং air writing','M-R letter দেখে sound বলা'],
+      ['দক্ষতা','Sequence ও retelling','৩ ছবির story সাজিয়ে বলা','শুরু-মাঝ-শেষ করে গল্প বলা'],
+      ['বাংলা','আ-কার দিয়ে শব্দ','কা, মা, না, বাবা-এর মতো শব্দ পড়ার প্রস্তুতি','৫টি আ-কার শব্দ দেখে বলা'],
+      ['ইংরেজি','S-Z recognition ও sound','S-Z sound, picture match, capital-small match','S-Z বলা এবং ৩টি letter লেখা'],
+      ['দক্ষতা','Rhyming ও listening','cat-hat, sun-fun ধরনের rhyme শুনে match','২ জোড়া rhyming word বলা'],
+      ['বাংলা','ই-কার ও ঈ-কার পরিচয়','কি/নি/দী-এর মতো শব্দে কার শুনে বলা','ই-কারের ৪টি শব্দ বলা'],
+      ['ইংরেজি','CVC oral blending','cat, sun, map, pin-এর sound ধীরে blend','৩টি CVC word শুনে ছবি দেখানো'],
+      ['দক্ষতা','Review checkpoint ১','Week 1-4-এর weak skill revise; ছোট oral check','যে ২টি skill কঠিন সেটি note করুন'],
+      ['বাংলা','উ-কার ও ঊ-কার পরিচয়','কু/নু/দূ-এর মতো sound ও matching','৪টি উ-কার শব্দ বলা'],
+      ['ইংরেজি','CVC reading set ১','sat, mat, pin, sit; sound-to-word blending','২টি word দেখে পড়ার চেষ্টা'],
+      ['দক্ষতা','Question words','কে, কী, কোথায়, কবে; picture answer','প্রতিটি question word-এ ১টি উত্তর'],
+      ['বাংলা','এ-কার ও ঐ-কার পরিচয়','কে/সে/মেঘ; sound, picture এবং word match','৩টি এ-কার শব্দ বলা'],
+      ['ইংরেজি','CVC reading set ২','dog, log, hen, pen; read and picture match','৪টি word-এর মধ্যে ২টি পড়া'],
+      ['দক্ষতা','নিজের কথা বলা','নাম, বয়স, পছন্দ, family নিয়ে ৪টি বাক্য','নিজের পরিচয় ১ মিনিট বলা'],
+      ['বাংলা','ও-কার ও ঔ-কার পরিচয়','বো/শো/মৌ-এর মতো শব্দে কার চেনা','৩টি শব্দ দেখে কার বলা'],
+      ['ইংরেজি','Simple sight words','I, a, am, is, my, see card practice','I am Arian বলা/পড়া'],
+      ['দক্ষতা','Story comprehension','ছোট story পড়ে/শুনে character, action, ending','গল্পের ৩টি প্রশ্নের উত্তর'],
+      ['বাংলা','কার-চিহ্ন review','া ি ী ু ূ ে ৈ ো ৌ আলাদা করে চেনা','শুনে সঠিক কার card তোলা'],
+      ['ইংরেজি','Short sentence reading','I see a cat. This is a pen. guided reading','২টি sentence আঙুল দিয়ে follow করা'],
+      ['দক্ষতা','Writing readiness','নিজের নাম, ১-১০ সংখ্যা, line spacing','নিজের নাম ২ বার লেখা'],
+      ['বাংলা','দুই/তিন অক্ষরের শব্দ','মা, বাবা, কলম, ফুল, মাছ; ছবি দেখে পড়া','৫টি familiar word পড়ার চেষ্টা'],
+      ['ইংরেজি','Sentence meaning','who/what is it; read and answer yes/no','২টি sentence-এর অর্থ বলা'],
+      ['দক্ষতা','Review checkpoint ২','Bangla sound, English phonics, oral response check','Teacher লিখবেন: পারে / সাহায্য লাগে'],
+      ['বাংলা','ছোট বাংলা বাক্য','এটা আম। আমি যাই। picture-supported reading','২টি বাক্য পড়ে ছবি match'],
+      ['ইংরেজি','Independent mini-book','৪-৫ page picture book; child points and reads known words','প্রতিদিন ৫ মিনিট বই দেখা'],
+      ['দক্ষতা','Final 2-month assessment','Bangla letters, ১০ শব্দ; English letters, ৫ CVC word','কোনো hint ছাড়া ছোট check'],
+      ['দক্ষতা','Celebration ও next plan','যা শিখেছে তা দিয়ে reading show; next target ঠিক করা','Arian নিজের পছন্দের বই বেছে নেবে']
+    ];
+
+    const storageKey = 'arians_core_plan_progress_v1';
+    const settingsKey = 'arians_core_plan_settings_v1';
+    let progress = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    let settings = JSON.parse(localStorage.getItem(settingsKey) || '{}');
+    let pageZoom = Number(localStorage.getItem('arians_core_plan_zoom') || 1);
+    let viewMode = localStorage.getItem('arians_core_plan_view') || (window.innerWidth <= 850 ? 'mobile' : 'desktop');
+    const startDate = document.getElementById('startDate');
+    startDate.value = settings.startDate || new Date().toISOString().slice(0,10);
+
+    function dateAt(index) { const date = new Date(startDate.value + 'T12:00:00'); let lessons = 0; while (lessons < index) { date.setDate(date.getDate() + 1); if (date.getDay() !== 0 && date.getDay() !== 6) lessons++; } return date; }
+    function formatDate(date) { return date.toLocaleDateString('bn-BD', { day:'numeric', month:'short', year:'numeric' }); }
+    function dateKey(date) { return date.toISOString().slice(0,10); }
+    function isReading(subject, index) { return subject === 'বাংলা' || subject === 'ইংরেজি' || index >= 36; }
+    function filteredRows() {
+      const subject = document.getElementById('subjectFilter').value;
+      const mode = document.getElementById('reportFilter').value;
+      const today = new Date(); today.setHours(0,0,0,0);
+      return plan.map((item,index) => ({ item, index, date:dateAt(index), key:dateKey(dateAt(index)) })).filter(row => {
+        if (subject !== 'all' && row.item[0] !== subject) return false;
+        if (mode === 'daily') return row.key === (document.getElementById('reportDate').value || dateKey(new Date()));
+        if (mode === 'weekly') return Math.floor(row.index / 5) === Number(document.getElementById('weekFilter').value);
+        if (mode === 'monthly') return row.date.getMonth() === dateAt(0).getMonth();
+        return true;
+      });
+    }
+    function render() {
+      const rows = filteredRows(); const body = document.getElementById('planBody');
+      body.innerHTML = rows.length ? rows.map(({item,index,date,key}) => {
+        const state = progress[key] || 'pending'; const subjectClass = item[0] === 'বাংলা' ? 'bn' : item[0] === 'ইংরেজি' ? 'en' : 'skill';
+        return `<tr class="${state === 'complete' ? 'done' : ''} ${key === dateKey(new Date()) ? 'today' : ''}"><td class="week-cell">Week ${Math.floor(index/5)+1}<br><span class="day-cell">Day ${(index%5)+1}</span></td><td class="day-cell">${formatDate(date)}</td><td><span class="subject ${subjectClass}">${item[0]}</span></td><td class="goal">${item[1]}</td><td class="activity">${item[2]}</td><td class="practice">${item[3]}</td><td><select class="status-select ${state}" onchange="setStatus('${key}', this.value)"><option value="pending" ${state==='pending'?'selected':''}>শুরু হয়নি</option><option value="partial" ${state==='partial'?'selected':''}>চলমান</option><option value="complete" ${state==='complete'?'selected':''}>সম্পন্ন</option></select></td></tr>`;
+      }).join('') : '<tr><td colspan="7" class="empty">এই filter-এর জন্য কোনো lesson নেই।</td></tr>';
+      document.getElementById('visibleCount').textContent = `${rows.length}টি lesson দেখানো হচ্ছে`;
+      document.getElementById('mobilePlan').innerHTML = rows.length ? rows.map(({item,index,date,key}) => {
+        const state = progress[key] || 'pending'; const subjectClass = item[0] === 'বাংলা' ? 'bn' : item[0] === 'ইংরেজি' ? 'en' : 'skill';
+        return `<details class="mobile-row"><summary><span class="mobile-day">W${Math.floor(index/5)+1}<br>D${(index%5)+1}</span><span class="mobile-goal"><span class="subject ${subjectClass}">${item[0]}</span> ${item[1]}<small>${formatDate(date)}</small></span><span class="status-tag ${state === 'complete' ? 'status-done' : state === 'partial' ? 'status-partial' : 'status-pending'}">${state === 'complete' ? 'সম্পন্ন' : state === 'partial' ? 'চলমান' : 'বাকি'}</span></summary><div class="mobile-details"><div><span class="mobile-detail-label">আজকের লক্ষ্য</span>${item[1]}</div><div><span class="mobile-detail-label">Teacher activity</span>${item[2]}</div><div><span class="mobile-detail-label">Home practice</span>${item[3]}</div><div class="mobile-status"><span class="mobile-detail-label">Progress status</span><select class="status-select ${state}" onchange="setStatus('${key}', this.value)"><option value="pending" ${state==='pending'?'selected':''}>শুরু হয়নি</option><option value="partial" ${state==='partial'?'selected':''}>চলমান</option><option value="complete" ${state==='complete'?'selected':''}>সম্পন্ন</option></select></div></div></details>`;
+      }).join('') : '<div class="empty">এই filter-এর জন্য কোনো lesson নেই।</div>';
+      updateSummary(); updateReport(rows);
+    }
+    function setStatus(key, value) { progress[key] = value; localStorage.setItem(storageKey, JSON.stringify(progress)); render(); }
+    function updateSummary() {
+      const complete = Object.values(progress).filter(value => value === 'complete').length;
+      const readingDone = plan.reduce((count,item,index) => count + (isReading(item[0],index) && progress[dateKey(dateAt(index))] === 'complete' ? 1 : 0), 0);
+      const weeksDone = Array.from({length:8},(_,week) => plan.slice(week*5,week*5+5).every((_,i) => progress[dateKey(dateAt(week*5+i))] === 'complete')).filter(Boolean).length;
+      document.getElementById('plannedCount').textContent = plan.length; document.getElementById('completeCount').textContent = complete; document.getElementById('readingCount').textContent = Math.round(readingDone / plan.filter((item,index) => isReading(item[0],index)).length * 100) + '%'; document.getElementById('weekCount').textContent = `${weeksDone}/8`;
+      document.getElementById('dateRange').textContent = `${formatDate(dateAt(0))} - ${formatDate(dateAt(39))}`;
+    }
+    function updateReport(rows) {
+      const complete = rows.filter(row => progress[row.key] === 'complete').length; const partial = rows.filter(row => progress[row.key] === 'partial').length;
+      const mode = document.getElementById('reportFilter').value; document.getElementById('reportTitle').textContent = mode === 'daily' ? 'নির্বাচিত দিনের report' : mode === 'weekly' ? 'প্রথম সপ্তাহের report' : mode === 'monthly' ? 'শুরুর মাসের report' : 'পুরো ২ মাসের report';
+      document.getElementById('resultList').innerHTML = `<li>মোট lesson: <strong>${rows.length}</strong></li><li>সম্পন্ন: <strong>${complete}</strong></li><li>চলমান: <strong>${partial}</strong></li><li>বাকি: <strong>${rows.length - complete - partial}</strong></li>`;
+      const next = plan.find((item,index) => !['complete'].includes(progress[dateKey(dateAt(index))])); document.getElementById('nextFocus').textContent = next ? `${next[0]}: ${next[1]} — ${next[2]}` : 'সব lesson সম্পন্ন। এখন review ও reading fluency বাড়ান।';
+      document.getElementById('milestoneText').textContent = 'প্রথম ৪ সপ্তাহে letter, sound ও word foundation। শেষ ৪ সপ্তাহে word থেকে ছোট sentence ও picture book reading। Teacher-এর observation অনুযায়ী পরের target বদলানো যাবে।';
+    }
+    function buildProgressRows() {
+      return plan.map((item,index) => {
+        const date = dateAt(index); const key = dateKey(date);
+        return [key, `Week ${Math.floor(index / 5) + 1}`, `Day ${(index % 5) + 1}`, item[0], item[1], item[2], item[3], progress[key] || 'pending', new Date().toLocaleString('bn-BD')];
+      });
+    }
+    function buildReportRows() {
+      return ['daily', 'weekly', 'monthly'].map(type => {
+        const rows = plan.map((item,index) => ({ index, key:dateKey(dateAt(index)) })).filter(row => {
+          if (type === 'daily') return row.key === (document.getElementById('reportDate').value || dateKey(new Date()));
+          if (type === 'weekly') return Math.floor(row.index / 5) === Number(document.getElementById('weekFilter').value);
+          return dateAt(row.index).getMonth() === dateAt(0).getMonth();
+        });
+        const complete = rows.filter(row => progress[row.key] === 'complete').length;
+        const partial = rows.filter(row => progress[row.key] === 'partial').length;
+        return [type, type === 'weekly' ? `Week ${Number(document.getElementById('weekFilter').value) + 1}` : type, rows.length, complete, partial, rows.length - complete - partial, new Date().toLocaleString('bn-BD')];
+      });
+    }
+    async function syncWithGoogleSheet() {
+      const message = document.getElementById('syncMessage'); message.hidden = false; message.textContent = 'Google Sheet-এ data save হচ্ছে...';
+      if (GOOGLE_APPS_SCRIPT_URL === 'PASTE_YOUR_SECOND_PROJECT_WEB_APP_URL_HERE') { message.textContent = 'আগে code_2_month_home_learning.gs deploy করে Web App URL এখানে বসান।'; return; }
+      try {
+        await fetch(GOOGLE_APPS_SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ progress:buildProgressRows(), reports:buildReportRows() }) });
+        message.textContent = 'Google Sheet-এ progress save হয়েছে।';
+      } catch (error) { message.textContent = 'Save হয়নি। Web App URL ও internet connection check করুন।'; }
+    }
+    function applyFilters() { settings.startDate = startDate.value; settings.reportDate = document.getElementById('reportDate').value; settings.week = document.getElementById('weekFilter').value; localStorage.setItem(settingsKey, JSON.stringify(settings)); render(); }
+    function updateFilterControls() { const mode = document.getElementById('reportFilter').value; document.getElementById('reportDateLabel').hidden = mode !== 'daily'; document.getElementById('weekFilterLabel').hidden = mode !== 'weekly'; }
+    function applyViewMode() { document.body.classList.toggle('mobile-mode', viewMode === 'mobile'); document.getElementById('viewToggle').textContent = viewMode === 'mobile' ? 'Desktop table view' : 'Mobile app view'; }
+    function toggleView() { viewMode = viewMode === 'mobile' ? 'desktop' : 'mobile'; localStorage.setItem('arians_core_plan_view', viewMode); applyViewMode(); }
+    function resetProgress() { if (confirm('সব daily progress মুছে ফেলবেন?')) { progress = {}; localStorage.removeItem(storageKey); render(); } }
+    function applyZoom() { document.querySelector('.shell').style.zoom = pageZoom; document.getElementById('zoomValue').textContent = `${Math.round(pageZoom * 100)}%`; localStorage.setItem('arians_core_plan_zoom', pageZoom); }
+    function changeZoom(amount) { pageZoom = Math.min(1.5, Math.max(0.7, Math.round((pageZoom + amount) * 10) / 10)); applyZoom(); }
+    document.getElementById('reportDate').value = settings.reportDate || startDate.value;
+    document.getElementById('weekFilter').value = settings.week || '0';
+    startDate.addEventListener('change', () => { document.getElementById('reportDate').value = startDate.value; applyFilters(); });
+    document.getElementById('reportFilter').addEventListener('change', () => { updateFilterControls(); render(); }); document.getElementById('reportDate').addEventListener('change', applyFilters); document.getElementById('weekFilter').addEventListener('change', applyFilters); document.getElementById('subjectFilter').addEventListener('change', render); updateFilterControls(); applyViewMode(); applyZoom(); render();
+  </script>
+</body>
+</html>

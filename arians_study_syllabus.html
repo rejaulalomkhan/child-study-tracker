@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arians Study - Syllabus & Evaluation Matrix</title>
+  <!-- Google Fonts for clear Bengali & English typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-navy: #152c5b;
+      --primary-blue: #1e40af;
+      --accent-blue: #2563eb;
+      --bg-body: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --badge-bg: #eff6ff;
+      --badge-text: #1d4ed8;
+      --badge-border: #bfdbfe;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans Bengali', sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      padding: 32px 40px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      padding: 36px 44px;
+    }
+
+    /* Top Header */
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #edf2f7;
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+
+    .brand-title {
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--primary-navy);
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .brand-subtitle {
+      font-size: 16px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 3px;
+    }
+
+    .brand-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .meta-box {
+      text-align: right;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #475569;
+    }
+
+    .meta-box strong {
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    .status-active {
+      color: #059669;
+      font-weight: 700;
+    }
+
+    /* KPI Summary Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+
+    .kpi-card {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-left: 5px solid var(--accent-blue);
+      border-radius: 8px;
+      padding: 16px 20px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: transform 0.15s ease;
+    }
+
+    .kpi-card:nth-child(2) { border-left-color: #0284c7; }
+    .kpi-card:nth-child(3) { border-left-color: #0d9488; }
+    .kpi-card:nth-child(4) { border-left-color: #16a34a; }
+
+    .kpi-num {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--primary-navy);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+      letter-spacing: 0.5px;
+      line-height: 1.45;
+      text-transform: uppercase;
+    }
+
+    /* Action & Filter Toolbar */
+    .action-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      background: #f1f5f9;
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      line-height: 1.45;
+    }
+
+    .filter-select {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 7px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      color: #0f172a;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .btn-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-print {
+      background-color: var(--primary-navy);
+      color: #ffffff;
+    }
+    .btn-print:hover {
+      background-color: #0f1f42;
+    }
+
+    .btn-sync {
+      background-color: #059669;
+      color: #ffffff;
+    }
+    .btn-sync:hover {
+      background-color: #047857;
+    }
+
+    .btn-reset {
+      background-color: #ffffff;
+      color: #dc2626;
+      border: 1px solid #fca5a5;
+    }
+    .btn-reset:hover {
+      background-color: #fef2f2;
+    }
+
+    /* Section Bar */
+    .section-title-wrap {
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary-navy);
+      text-transform: uppercase;
+      letter-spacing: -0.2px;
+      border-left: 5px solid var(--primary-navy);
+      padding-left: 12px;
+      margin-bottom: 4px;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding-left: 17px;
+    }
+
+    /* Table Styling matching BCL screenshot */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13.5px;
+    }
+
+    thead th {
+      background-color: var(--primary-navy);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      padding: 14px 16px;
+      line-height: 1.55;
+      border: 1px solid #1a346e;
+      white-space: nowrap;
+    }
+
+    thead th.center, tbody td.center {
+      text-align: center;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.15s;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #fbfcfe;
+    }
+
+    tbody tr:hover {
+      background-color: #f1f5f9;
+    }
+
+    tbody td {
+      padding: 12px 16px;
+      border-right: 1px solid #edf2f7;
+      vertical-align: middle;
+      color: #1e293b;
+      line-height: 1.7;
+    }
+
+    tbody td:last-child {
+      border-right: none;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 9999px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .badge-bangla { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+    .badge-english { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .badge-math { background: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; }
+    .badge-gk { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+    .badge-art { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .badge-arabic { background: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; }
+
+    /* Custom Checkboxes */
+    .check-cell {
+      text-align: center;
+    }
+
+    .custom-check {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #94a3b8;
+      border-radius: 5px;
+      background-color: #ffffff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.15s ease;
+      vertical-align: middle;
+    }
+
+    .custom-check:checked {
+      background-color: #2563eb;
+      border-color: #2563eb;
+    }
+
+    .custom-check:checked::after {
+      content: '✓';
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .status-tag {
+      display: inline-block;
+      padding: 3px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 9999px;
+    }
+
+    .status-pending { background: #f1f5f9; color: #64748b; border: 1px solid #cbd5e1; }
+    .status-partial { background: #fef9c3; color: #854d0e; border: 1px solid #fef08a; }
+    .status-done { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+
+    /* Sync Alert Box */
+    .sync-alert {
+      display: none;
+      margin-top: 18px;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .sync-alert.success { display: block; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .sync-alert.info { display: block; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+    .sync-alert.error { display: block; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+    /* Print Specific Media Query */
+    @media print {
+      body {
+        padding: 0;
+        background: #ffffff;
+      }
+      .container {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      .action-toolbar, .btn-group, .sync-alert, #filterSelect {
+        display: none !important;
+      }
+      .kpi-grid {
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .kpi-card {
+        padding: 10px 14px;
+        border-left-width: 4px;
+      }
+      .kpi-num {
+        font-size: 24px;
+      }
+      thead th {
+        background-color: #152c5b !important;
+        color: #ffffff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      tbody tr:nth-child(even) {
+        background-color: #f8fafc !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .badge, .status-tag, .custom-check:checked {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Top Header Row -->
+  <div class="header-row">
+    <div>
+      <div class="brand-title">Arians Study</div>
+      <div class="brand-subtitle">Student Progress & Syllabus Evaluation System (SPSES)</div>
+      <div class="brand-desc">হাতে লেখা মূল পাঠ্যক্রমের ডিজিটাল ট্র্যাকার ও শিক্ষার্থী অগ্রগতি মূল্যায়ন রিপোর্ট</div>
+    </div>
+    <div class="meta-box">
+      <div><strong>Report Date:</strong> 16 September, 2026</div>
+      <div><strong>Academic Year:</strong> 2026 – 2027</div>
+      <div><strong>System Status:</strong> <span class="status-active">Active</span></div>
+      <div><strong>Evaluation By:</strong> Teacher / Supervisor</div>
+    </div>
+  </div>
+
+  <!-- KPI Summary Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-num" id="totalTopics">54</div>
+      <div class="kpi-label">TOTAL TOPICS (মোট পাঠ)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num" id="taughtCount">0</div>
+      <div class="kpi-label">শেখানো হয়েছে (TAUGHT)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num" id="oralCount">0</div>
+      <div class="kpi-label">বলতে পারে (ORAL MASTERY)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num" id="writtenCount">0</div>
+      <div class="kpi-label">লিখতে পারে (WRITTEN MASTERY)</div>
+    </div>
+  </div>
+
+  <!-- Action & Filter Bar -->
+  <div class="action-toolbar">
+    <div class="filter-group">
+      <span class="filter-label">বিষয় ফিল্টার:</span>
+      <select id="filterSelect" class="filter-select" onchange="filterTable()">
+        <option value="ALL">সকল বিষয় (ALL SUBJECTS)</option>
+        <option value="বাংলা">বাংলা (Bangla)</option>
+        <option value="ইংরেজি">ইংরেজি (English)</option>
+        <option value="গণিত">অংক / গণিত (Mathematics)</option>
+        <option value="সাধারণ জ্ঞান">সাধারণ জ্ঞান (General Knowledge)</option>
+        <option value="অংকন">অংকন (Drawing)</option>
+        <option value="আরবি">আরবি ও ইসলাম শিক্ষা (Arabic & Islam)</option>
+      </select>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-reset" onclick="resetAllChecks()">🔄 রিসেট</button>
+      <button class="btn btn-sync" onclick="syncWithGoogleSheet()">☁️ গুগল শিটে সেভ করুন</button>
+      <button class="btn btn-print" onclick="window.print()">🖨️ Print Report</button>
+    </div>
+  </div>
+
+  <!-- Status Alert for Google Apps Script -->
+  <div id="syncAlert" class="sync-alert"></div>
+
+  <!-- Section Title -->
+  <div class="section-title-wrap">
+    <div class="section-title">1. SYLLABUS & STUDENT COMPETENCY MATRIX</div>
+    <div class="section-subtitle">প্রতিটি পাঠ্যসূচির বিপরীতে চেকমার্ক দিয়ে শিক্ষার্থীর বর্তমান দক্ষতা ও অগ্রগতি নির্ধারণ করুন।</div>
+  </div>
+
+  <!-- Main Table -->
+  <div class="table-responsive">
+    <table id="syllabusTable">
+      <thead>
+        <tr>
+          <th style="width: 50px;" class="center">#</th>
+          <th style="width: 140px;">বিষয় (SUBJECT)</th>
+          <th>পাঠ্যসূচি ও নির্ধারিত বিষয়বস্তু (TOPIC DETAILS)</th>
+          <th style="width: 130px;" class="center">শেখানো হয়েছে</th>
+          <th style="width: 130px;" class="center">বলতে পারে</th>
+          <th style="width: 130px;" class="center">লিখতে পারে</th>
+          <th style="width: 130px;" class="center">অগ্রগতি (STATUS)</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <!-- Rows will be injected by JavaScript -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  // Google Spreadsheet Web App URL (আপনার Apps Script Deploy করা Web App URL এখানে বসাবেন)
+  const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQYcN9MIaCgvsw4uDhduX1FY_3bdV6Agv6fyXabvCR2i068ZHgfnwknDxedHFTBG0CHw/exec";
+
+  // মূল সিলেবাস ডেটাসেট (হাতে লেখা সম্পূর্ণ ৫ পাতা থেকে সংগৃহীত)
+  const syllabusData = [
+    // বাংলা
+    { id: 1, subject: "বাংলা", topic: "স্বরবর্ণ ১১টি (অ – ঔ) সুন্দর করে পড়া ও লেখা।" },
+    { id: 2, subject: "বাংলা", topic: "ব্যঞ্জনবর্ণ ৩৯টি (ক – ঁ) চেনা ও সঠিকভাবে লেখা।" },
+    { id: 3, subject: "বাংলা", topic: "কার চিহ্ন ১০টি (া, ি, ী, ু, ূ, ৃ, ে, ৈ, ো, ৌ), এর ব্যবহার ও বানান।" },
+    { id: 4, subject: "বাংলা", topic: "৫টি করে নাম: ফুলের নাম / ফলের নাম / মাছের নাম / পাখির নাম / পশুর নাম।" },
+    { id: 5, subject: "বাংলা", topic: "নামকরণ: ৭ দিনের নাম / ১২ মাসের নাম / দিকের নাম / রংয়ের নাম / ঋতুর নাম।" },
+    { id: 6, subject: "বাংলা", topic: "আগের বর্ণ / পরের বর্ণ / মাঝের বর্ণ শিখানো ও ফাঁকা ঘর পূরণ।" },
+    { id: 7, subject: "বাংলা", topic: "এলোমেলো শব্দ সাজিয়ে সঠিকভাবে লিখা।" },
+    { id: 8, subject: "বাংলা", topic: "পাঠ্যবই ও নির্ধারিত তালিকা থেকে শব্দের অর্থ শিখা ও লিখা।" },
+    { id: 9, subject: "বাংলা", topic: "সহজ ও ছোট প্রশ্নের উত্তর লিখা।" },
+    { id: 10, subject: "বাংলা", topic: "কবিতা মুখে মুখে বলা ও খাতায় সুন্দর করে লিখা।" },
+    { id: 11, subject: "বাংলা", topic: "বাংলা ফলা চিহ্ন সঠিকভাবে ব্যবহার করা।" },
+    { id: 12, subject: "বাংলা", topic: "বিপরীত শব্দ ও ছোট ছোট বাক্য গঠন শিখা।" },
+    { id: 13, subject: "বাংলা", topic: "নিজের পরিচয় বলা ও খাতায় লিখা।" },
+    { id: 14, subject: "বাংলা", topic: "অনুচ্ছেদ লিখন / রচনা: 'আমার মা' ও 'নিজের কথা'।" },
+    { id: 15, subject: "বাংলা", topic: "জেনে রাখো: পাঠ্যবইয়ের পৃষ্ঠা ৫, ১৮ ও প্রাসঙ্গিক তথ্য।" },
+
+    // ইংরেজি
+    { id: 16, subject: "ইংরেজি", topic: "Rhymes / Poem: ইংরেজি ছড়া বা কবিতা মুখে মুখে বলা ও লিখা।" },
+    { id: 17, subject: "ইংরেজি", topic: "Capital Letter ও Small Letter চেনা, লিখা ও বলা; Vowel ও বানান শিখা।" },
+    { id: 18, subject: "ইংরেজি", topic: "Letter Practice: আগের, পরের, মাঝের বর্ণ ও ফাঁকা ঘর ইত্যাদি দিয়ে বর্ণ লিখা।" },
+    { id: 19, subject: "ইংরেজি", topic: "Re-arrange: এলোমেলো বর্ণ সাজিয়ে সঠিক Letter বা শব্দ গঠন করা।" },
+    { id: 20, subject: "ইংরেজি", topic: "Word Making: A – Z পর্যন্ত শব্দের ৩টি করে শব্দ ও বাংলা অর্থ বলা ও লিখা।" },
+    { id: 21, subject: "ইংরেজি", topic: "শব্দের এলোমেলো বর্ণ সাজানো, ফাঁকা ঘর ও শূন্যস্থান ইত্যাদি ভাবে লিখানো।" },
+    { id: 22, subject: "ইংরেজি", topic: "Vocabulary: পশু, পাখি, মাছ, ফুল, ফল, ৭ দিন, ১২ মাস, রং, দিক ও ঋতুর ইংরেজি নাম ও অর্থ।" },
+    { id: 23, subject: "ইংরেজি", topic: "Word Meaning: ইংরেজি শব্দের বাংলা অর্থ শিখা ও লিখা।" },
+    { id: 24, subject: "ইংরেজি", topic: "Question & Answer: সহজ ইংরেজি প্রশ্নের উত্তর শিখা ও লিখা।" },
+    { id: 25, subject: "ইংরেজি", topic: "Introduction: নিজের পরিচয় (Introduction / Myself) উপস্থাপন ও লিখা।" },
+    { id: 26, subject: "ইংরেজি", topic: "Grammar: A, An, The-এর ব্যবহার ও বাক্য তৈরি করা শিখা।" },
+    { id: 27, subject: "ইংরেজি", topic: "Short Paragraph: নিজের সম্পর্কে ৫টি বাক্য ('Myself') ও মায়ের সম্পর্কে ৫টি বাক্য ('My Mother')।" },
+
+    // গণিত / অংক
+    { id: 28, subject: "গণিত", topic: "শতকিয়া (বাংলা): ১ থেকে ১০০ পর্যন্ত গণনা ও লিখা।" },
+    { id: 29, subject: "গণিত", topic: "Number Counting (English): 1 to 100 পর্যন্ত গণনা ও লিখা।" },
+    { id: 30, subject: "গণিত", topic: "যোগের নামতা: ১ থেকে ১০ পর্যন্ত।" },
+    { id: 31, subject: "গণিত", topic: "বিয়োগের নামতা: ১ থেকে ১০ পর্যন্ত।" },
+    { id: 32, subject: "গণিত", topic: "গুণ: প্রাথমিক গুণের নিয়ম ও সমাধান শিখানো।" },
+    { id: 33, subject: "গণিত", topic: "ভাগ: প্রাথমিক ভাগের নিয়ম ও সমাধান করানো।" },
+    { id: 34, subject: "গণিত", topic: "গুণের নামতা: ১ থেকে ১০-এর ঘরের নামতা শিখানো।" },
+    { id: 35, subject: "গণিত", topic: "শতকিয়া বানান (বাংলা): কথায় লেখা ১ থেকে ৫০ পর্যন্ত।" },
+    { id: 36, subject: "গণিত", topic: "Number Spelling (English): In words 1 to 50 পর্যন্ত।" },
+    { id: 37, subject: "গণিত", topic: "সংখ্যার অনুশীলন: আগের, পরের, মাঝের, ফাঁকা ঘর ও এলোমেলো সংখ্যা সাজানো।" },
+    { id: 38, subject: "গণিত", topic: "পাশাপাশি সমাধান: সাধারণ যোগ, বিয়োগ, গুণ ও ভাগ সমাধান।" },
+    { id: 39, subject: "গণিত", topic: "ফাঁকা ঘরের সমস্যা: ফাঁকা ঘরে সঠিক সংখ্যা বসিয়ে যোগ ও বিয়োগ নির্ণয়।" },
+    { id: 40, subject: "গণিত", topic: "তুলনামূলক ধারণা: বড় সংখ্যা ও ছোট সংখ্যা নির্ণয়।" },
+    { id: 41, subject: "গণিত", topic: "রোমান সংখ্যা: Roman Numbers (I – XX) পরিচয় ও লিখা।" },
+    { id: 42, subject: "গণিত", topic: "ক্রমবাচক সংখ্যা: ১ম থেকে ২০শ পর্যন্ত চেনা ও লিখা।" },
+    { id: 43, subject: "গণিত", topic: "জোড় ও বিজোড় সংখ্যা: বাংলায় (১ – ১০০) ও ইংরেজিতে (1 – 100)।" },
+    { id: 44, subject: "গণিত", topic: "রূপান্তর: ইংরেজি শতকিয়া থেকে বাংলা শতকিয়া বানান ও সংখ্যা রূপান্তর।" },
+    { id: 45, subject: "গণিত", topic: "জ্যামিতি প্রাথমিক ধারণা: ত্রিভুজ, বর্গ, চতুর্ভুজ, বৃত্ত ও কোণ।" },
+    { id: 46, subject: "গণিত", topic: "এক কথার প্রকাশ: গণিত বিষয়ক (শিক্ষকের মতামতের উপর)।" },
+
+    // সাধারণ জ্ঞান
+    { id: 47, subject: "সাধারণ জ্ঞান", topic: "সাধারণ জ্ঞান পাঠ্যবই থেকে নির্ধারিত পাঠ ও প্রশ্নোত্তর।" },
+    { id: 48, subject: "সাধারণ জ্ঞান", topic: "পরিবেশ ও পরিচিতি: ফুল, ফল, পশু, পাখি, রংয়ের নাম ও নিজের কথা সংক্রান্ত মৌলিক তথ্য।" },
+
+    // অংকন
+    { id: 49, subject: "অংকন", topic: "সহজ বস্তু ও জীবজন্তু আঁকা: মই, বল, পতাকা, পেন্সিল, মোমবাতি, ফুল ও মৌমাছি।" },
+    { id: 50, subject: "অংকন", topic: "ফলমূল আঁকা: আম ও আপেল আঁকা।" },
+    { id: 51, subject: "অংকন", topic: "জ্যামিতিক রূপ আঁকা: ত্রিভুজ, চতুর্ভুজ, বর্গ ও বৃত্ত আঁকা শিখা।" },
+
+    // আরবি ও ইসলাম শিক্ষা
+    { id: 52, subject: "আরবি", topic: "আরবি হরফ লিখন: আলিফ থেকে ইয়া (ا - ي) পর্যন্ত হরফ চেনা ও লিখা।" },
+    { id: 53, subject: "আরবি", topic: "হরফ অনুশীলন: এলোমেলো, আগের, পরের ও মাঝের হরফ নির্ণয় করে লিখা।" },
+    { id: 54, subject: "আরবি", topic: "হরফ দিয়ে প্রাথমিক শব্দ ও বাক্য মুখে বলা।" },
+    { id: 55, subject: "আরবি", topic: "আরবিতে বাংলা উচ্চারণ দিয়ে ফুল, ফল, পাখি, পশু, মাছ, ৭ দিন ও ১২ মাসের নাম মুখে বলা ও লিখা।" },
+    { id: 56, subject: "আরবি", topic: "ইসলাম শিক্ষা: ইসলাম সম্পর্কে প্রাথমিক ও মৌলিক ধারণা বই থেকে পাঠদান।" }
+  ];
+
+  // বিষয়ভিত্তিক ব্যাজ ক্লাস ম্যাপিং
+  const badgeClasses = {
+    "বাংলা": "badge-bangla",
+    "ইংরেজি": "badge-english",
+    "গণিত": "badge-math",
+    "সাধারণ জ্ঞান": "badge-gk",
+    "অংকন": "badge-art",
+    "আরবি": "badge-arabic"
+  };
+
+  // স্টেট ম্যানেজমেন্ট (Local Storage ভিত্তিক ডাটাবেজ ব্যাকআপ)
+  let studentProgress = JSON.parse(localStorage.getItem('arians_study_progress') || '{}');
+
+  // টেবিল রেন্ডারিং
+  function renderTable(filter = 'ALL') {
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = '';
+
+    const filteredList = filter === 'ALL' 
+      ? syllabusData 
+      : syllabusData.filter(item => item.subject === filter);
+
+    filteredList.forEach(item => {
+      const rowState = studentProgress[item.id] || { taught: false, oral: false, written: false };
+      const tr = document.createElement('tr');
+      tr.setAttribute('data-subject', item.subject);
+
+      // ক্যালকুলেট স্ট্যাটাস
+      let statusHtml = '<span class="status-tag status-pending">শুরু হয়নি</span>';
+      const checkCount = (rowState.taught ? 1 : 0) + (rowState.oral ? 1 : 0) + (rowState.written ? 1 : 0);
+      if (checkCount === 3) {
+        statusHtml = '<span class="status-tag status-done">সম্পন্ন ✓</span>';
+      } else if (checkCount > 0) {
+        statusHtml = '<span class="status-tag status-partial">চলমান (' + checkCount + '/3)</span>';
+      }
+
+      tr.innerHTML = `
+        <td class="center" style="font-weight: 600; color: #64748b;">${item.id}</td>
+        <td><span class="badge ${badgeClasses[item.subject] || ''}">${item.subject}</span></td>
+        <td style="font-weight: 500;">${item.topic}</td>
+        <td class="check-cell">
+          <input type="checkbox" class="custom-check" 
+            ${rowState.taught ? 'checked' : ''} 
+            onchange="updateCheck(${item.id}, 'taught', this.checked)">
+        </td>
+        <td class="check-cell">
+          <input type="checkbox" class="custom-check" 
+            ${rowState.oral ? 'checked' : ''} 
+            onchange="updateCheck(${item.id}, 'oral', this.checked)">
+        </td>
+        <td class="check-cell">
+          <input type="checkbox" class="custom-check" 
+            ${rowState.written ? 'checked' : ''} 
+            onchange="updateCheck(${item.id}, 'written', this.checked)">
+        </td>
+        <td class="center" id="status-${item.id}">
+          ${statusHtml}
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    updateCounters();
+  }
+
+  // চেকবক্স আপডেট লজিক
+  function updateCheck(id, field, value) {
+    if (!studentProgress[id]) {
+      studentProgress[id] = { taught: false, oral: false, written: false };
+    }
+    studentProgress[id][field] = value;
+    localStorage.setItem('arians_study_progress', JSON.stringify(studentProgress));
+
+    // রো স্ট্যাটাস রিফ্রেশ
+    const rowState = studentProgress[id];
+    const checkCount = (rowState.taught ? 1 : 0) + (rowState.oral ? 1 : 0) + (rowState.written ? 1 : 0);
+    const statusCell = document.getElementById(`status-${id}`);
+    if (statusCell) {
+      if (checkCount === 3) {
+        statusCell.innerHTML = '<span class="status-tag status-done">সম্পন্ন ✓</span>';
+      } else if (checkCount > 0) {
+        statusCell.innerHTML = `<span class="status-tag status-partial">চলমান (${checkCount}/3)</span>`;
+      } else {
+        statusCell.innerHTML = '<span class="status-tag status-pending">শুরু হয়নি</span>';
+      }
+    }
+
+    updateCounters();
+  }
+
+  // মোট মেট্রিক আপডেট
+  function updateCounters() {
+    let taught = 0;
+    let oral = 0;
+    let written = 0;
+
+    Object.values(studentProgress).forEach(item => {
+      if (item.taught) taught++;
+      if (item.oral) oral++;
+      if (item.written) written++;
+    });
+
+    document.getElementById('totalTopics').innerText = syllabusData.length;
+    document.getElementById('taughtCount').innerText = taught;
+    document.getElementById('oralCount').innerText = oral;
+    document.getElementById('writtenCount').innerText = written;
+  }
+
+  // ফিল্টারিং
+  function filterTable() {
+    const val = document.getElementById('filterSelect').value;
+    renderTable(val);
+  }
+
+  // রিসেট ফাংশন
+  function resetAllChecks() {
+    if (confirm("আপনি কি সমস্ত চেকমার্ক রিসেট করতে চান?")) {
+      studentProgress = {};
+      localStorage.removeItem('arians_study_progress');
+      renderTable(document.getElementById('filterSelect').value);
+    }
+  }
+
+  // গুগল স্প্রেডশিট সিঙ্ক ফাংশন (Google Apps Script Integration)
+  async function syncWithGoogleSheet() {
+    const alertBox = document.getElementById('syncAlert');
+    
+    if (GOOGLE_APPS_SCRIPT_URL === "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE" || !GOOGLE_APPS_SCRIPT_URL) {
+      alertBox.className = 'sync-alert info';
+      alertBox.innerHTML = `<strong>⚠️ গুগল অ্যাপস স্ক্রিপ্ট সেটআপ প্রয়োজন:</strong><br>
+        বর্তমানে লোকাল স্টোরেজে (ব্রাউজারে) ডাটা সংরক্ষিত হচ্ছে। গুগল স্প্রেডশিটে সরাসরি ডাটা পাঠাতে কোডের <code>GOOGLE_APPS_SCRIPT_URL</code> ভেরিয়েবলে আপনার Apps Script Web App URL পেস্ট করুন।`;
+      return;
+    }
+
+    alertBox.className = 'sync-alert info';
+    alertBox.innerHTML = `<strong>🔄 ডাটা সিঙ্ক হচ্ছে...</strong> অনুগ্রহ করে অপেক্ষা করুন।`;
+
+    try {
+      // কমপ্লিট পেলোড তৈরি
+      const payload = syllabusData.map(item => {
+        const state = studentProgress[item.id] || { taught: false, oral: false, written: false };
+        return {
+          id: item.id,
+          subject: item.subject,
+          topic: item.topic,
+          taught: state.taught ? "হ্যাঁ" : "না",
+          oral: state.oral ? "হ্যাঁ" : "না",
+          written: state.written ? "হ্যাঁ" : "না",
+          updatedAt: new Date().toLocaleString("bn-BD")
+        };
+      });
+
+      const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        mode: 'no-cors', // Google Apps Script Web App standard mode
+        body: JSON.stringify({ data: payload })
+      });
+
+      alertBox.className = 'sync-alert success';
+      alertBox.innerHTML = `<strong>✅ সফলভাবে সংরক্ষিত হয়েছে!</strong> গুগল স্প্রেডশিটে ডাটা আপডেট সম্পন্ন হয়েছে।`;
+      setTimeout(() => { alertBox.style.display = 'none'; }, 4000);
+
+    } catch (err) {
+      console.error(err);
+      alertBox.className = 'sync-alert error';
+      alertBox.innerHTML = `<strong>❌ ত্রুটি ঘটেছে:</strong> গুগল শিটে ডাটা সংরক্ষণ করা যায়নি। ইন্টারনেট সংযোগ চেক করুন।`;
+    }
+  }
+
+  // পেজ লোড হলে টেবিল ইনিশিয়ালাইজ
+  window.addEventListener('DOMContentLoaded', () => {
+    renderTable();
+  });
+</script>
+
+</body>
+</html>
