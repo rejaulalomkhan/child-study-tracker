@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arians Study - Syllabus & Evaluation Matrix</title>
+  <title>Child Study Tracker</title>
   <!-- Google Fonts for clear Bengali & English typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="icon-192.svg">
+  <link rel="apple-touch-icon" href="icon-192.svg">
   <meta name="theme-color" content="#152c5b">
   <meta name="mobile-web-app-capable" content="yes">
 
@@ -466,6 +468,40 @@
     .sync-alert.success { display: block; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
     .sync-alert.info { display: block; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
     .sync-alert.error { display: block; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+    .app-loader {
+      display: grid;
+      min-height: calc(100vh - 64px);
+      place-items: center;
+      padding: 24px;
+      color: var(--primary-navy);
+      text-align: center;
+    }
+
+    .app-loader-card {
+      display: grid;
+      justify-items: center;
+      gap: 12px;
+    }
+
+    .app-loader-spinner {
+      width: 42px;
+      height: 42px;
+      border: 4px solid #dbeafe;
+      border-top-color: var(--accent-blue);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .app-loader-title {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .app-loader-copy {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
 
     .auth-screen {
       display: grid;
@@ -976,7 +1012,15 @@
 </head>
 <body>
 
-<section class="auth-screen" id="authScreen">
+<div class="app-loader" id="appLoader" role="status" aria-live="polite">
+  <div class="app-loader-card">
+    <div class="app-loader-spinner" aria-hidden="true"></div>
+    <div class="app-loader-title">Child Study Tracker</div>
+    <div class="app-loader-copy">ডাটা লোড হচ্ছে...</div>
+  </div>
+</div>
+
+<section class="auth-screen" id="authScreen" hidden>
   <div class="auth-card">
     <div class="auth-kicker">Arians Study</div>
     <h1 class="auth-title">Student Study Tracker</h1>
@@ -1163,6 +1207,10 @@
     const messageBox = document.getElementById('authMessage');
     messageBox.classList.remove('loading');
     messageBox.textContent = message;
+  }
+
+  function hideAppLoader() {
+    document.getElementById('appLoader').hidden = true;
   }
 
   function setAuthLoading(message) {
@@ -1637,12 +1685,11 @@
     if (!activeStudent) {
       document.getElementById('authScreen').hidden = false;
       document.getElementById('appContainer').hidden = true;
+      hideAppLoader();
       return;
     }
     document.getElementById('activeStudentName').textContent = activeStudent.name;
     document.getElementById('activeStudentPeriod').textContent = formatPeriod(activeStudent.startMonth, activeStudent.endMonth);
-    document.getElementById('authScreen').hidden = true;
-    document.getElementById('appContainer').hidden = false;
     try {
       const result = await apiRequest('load', { studentId: activeStudent.studentId, phone: activeStudent.phone });
       openStudent(result.student, result.data);
@@ -1656,6 +1703,8 @@
         document.getElementById('authScreen').hidden = false;
         setAuthMessage('Session পাওয়া যায়নি। Guardian phone দিয়ে আবার login করুন।');
       }
+    } finally {
+      hideAppLoader();
     }
   }
 
