@@ -503,6 +503,83 @@
       font-size: 12px;
     }
 
+    .install-prompt {
+      display: none;
+      position: fixed;
+      right: 18px;
+      bottom: 54px;
+      z-index: 110;
+      width: min(360px, calc(100vw - 36px));
+      padding: 14px;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      background: #ffffff;
+      box-shadow: 0 12px 30px rgba(21, 44, 91, 0.18);
+    }
+
+    .install-prompt.is-visible {
+      display: grid;
+      gap: 10px;
+      animation: installPromptIn 0.25s ease-out;
+    }
+
+    .install-prompt-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .install-prompt-icon {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      border-radius: 8px;
+    }
+
+    .install-prompt-title {
+      color: var(--primary-navy);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .install-prompt-copy {
+      margin-top: 2px;
+      color: var(--text-muted);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .install-prompt-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .install-prompt-actions button {
+      padding: 6px 11px;
+      border: 0;
+      border-radius: 5px;
+      font: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .install-dismiss {
+      background: #f1f5f9;
+      color: var(--text-muted);
+    }
+
+    .install-now {
+      background: var(--primary-blue);
+      color: #ffffff;
+    }
+
+    @keyframes installPromptIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .auth-screen {
       display: grid;
       min-height: calc(100vh - 64px);
@@ -1022,8 +1099,8 @@
 
 <section class="auth-screen" id="authScreen" hidden>
   <div class="auth-card">
-    <div class="auth-kicker">Arians Study</div>
-    <h1 class="auth-title">Student Study Tracker</h1>
+    <div class="auth-kicker">Inspired by Arian's learning journey</div>
+    <h1 class="auth-title">Child Study Tracker</h1>
     <p class="auth-copy">প্রথমবার হলে student registration করুন। আগে registration করা থাকলে guardian phone দিয়ে student নির্বাচন করুন।</p>
     <div class="auth-mode" role="tablist" aria-label="Student access mode">
       <button type="button" id="loginModeButton" class="active" role="tab" aria-selected="true" onclick="showAuthMode('login')">Existing student</button>
@@ -1170,14 +1247,54 @@
   Developed by <a href="https://wa.me/8801916628339" target="_blank" rel="noopener noreferrer">Arman azij</a>
 </footer>
 
+<aside class="install-prompt" id="installPrompt" aria-live="polite">
+  <div class="install-prompt-content">
+    <img class="install-prompt-icon" src="icon-192.svg" alt="">
+    <div>
+      <div class="install-prompt-title">Child Study Tracker install করুন</div>
+      <div class="install-prompt-copy">ফোনে দ্রুত খুলতে app হিসেবে install করে রাখুন।</div>
+    </div>
+  </div>
+  <div class="install-prompt-actions">
+    <button class="install-dismiss" type="button" onclick="dismissInstallPrompt()">এখন নয়</button>
+    <button class="install-now" type="button" onclick="installApp()">Install app</button>
+  </div>
+</aside>
+
 <script>
   // Google Spreadsheet Web App URL (আপনার Apps Script Deploy করা Web App URL এখানে বসাবেন)
   const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQYcN9MIaCgvsw4uDhduX1FY_3bdV6Agv6fyXabvCR2i068ZHgfnwknDxedHFTBG0CHw/exec";
   const SESSION_KEY = 'arians_study_session';
   const PENDING_SYNC_KEY = 'arians_pending_sync';
   const PENDING_REGISTRATION_KEY = 'arians_pending_registration';
+  const INSTALL_DISMISSED_KEY = 'child_study_install_dismissed';
   let activeStudent = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
   let syncTimer;
+  let deferredInstallPrompt = null;
+
+  function isAppInstalled() {
+    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  }
+
+  function showInstallPrompt() {
+    if (deferredInstallPrompt && !isAppInstalled() && !localStorage.getItem(INSTALL_DISMISSED_KEY)) {
+      document.getElementById('installPrompt').classList.add('is-visible');
+    }
+  }
+
+  function dismissInstallPrompt() {
+    localStorage.setItem(INSTALL_DISMISSED_KEY, 'true');
+    document.getElementById('installPrompt').classList.remove('is-visible');
+  }
+
+  async function installApp() {
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    const choice = await deferredInstallPrompt.userChoice;
+    if (choice.outcome === 'accepted') localStorage.removeItem(INSTALL_DISMISSED_KEY);
+    deferredInstallPrompt = null;
+    document.getElementById('installPrompt').classList.remove('is-visible');
+  }
 
   async function apiRequest(action, payload = {}) {
     const request = { action, ...payload };
@@ -1709,9 +1826,19 @@
   }
 
   window.addEventListener('online', flushPendingSync);
+  window.addEventListener('beforeinstallprompt', event => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    showInstallPrompt();
+  });
+  window.addEventListener('appinstalled', () => {
+    deferredInstallPrompt = null;
+    document.getElementById('installPrompt').classList.remove('is-visible');
+  });
   window.addEventListener('DOMContentLoaded', () => {
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(console.error);
     bootApp();
+    setTimeout(showInstallPrompt, 700);
   });
 </script>
 
