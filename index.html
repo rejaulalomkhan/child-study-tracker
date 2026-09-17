@@ -645,6 +645,29 @@
       box-shadow: 0 1px 4px rgba(15, 23, 42, 0.1);
     }
 
+    .auth-mode #registerModeButton {
+      border: 1px solid #93c5fd;
+      background: #eff6ff;
+      color: var(--primary-blue);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.14);
+      animation: registrationAttention 3s ease-out 2;
+    }
+
+    .auth-mode #registerModeButton:hover,
+    .auth-mode #registerModeButton.active {
+      background: var(--primary-blue);
+      color: #ffffff;
+      border-color: var(--primary-blue);
+    }
+
+    @keyframes registrationAttention {
+      0%, 100% { transform: translateX(0); }
+      12% { transform: translateX(2px); }
+      24% { transform: translateX(-2px); }
+      36% { transform: translateX(1px); }
+      48% { transform: translateX(0); }
+    }
+
     .auth-form {
       display: grid;
       gap: 12px;
@@ -688,6 +711,38 @@
     .auth-submit:disabled {
       cursor: wait;
       opacity: 0.78;
+    }
+
+    .install-app-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 40px;
+      padding: 8px 14px;
+      border: 1px solid #93c5fd;
+      border-radius: 7px;
+      background: #eff6ff;
+      color: var(--primary-blue);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .install-app-button:hover {
+      background: var(--primary-blue);
+      color: #ffffff;
+    }
+
+    .auth-install-button {
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .tracker-install-button {
+      margin-top: 8px;
+      background: #ffffff;
     }
 
     .button-spinner,
@@ -1130,6 +1185,9 @@
       <button class="auth-submit" id="loginSubmit" type="submit"><span class="button-spinner" aria-hidden="true"></span><span class="button-label">Find students</span></button>
       <div id="studentResults" class="student-results"></div>
     </form>
+    <button class="install-app-button auth-install-button" id="authInstallButton" type="button" onclick="installApp()">
+      <span aria-hidden="true">📲</span> Install App
+    </button>
     <div id="authMessage" class="auth-message" role="alert"></div>
   </div>
 </section>
@@ -1149,6 +1207,7 @@
       <div><strong>System Status:</strong> <span class="status-active">Active</span></div>
       <div><strong>Evaluation By:</strong> Teacher / Supervisor</div>
       <button class="logout-btn" type="button" onclick="logoutStudent()">Log out</button>
+      <button class="install-app-button tracker-install-button" id="trackerInstallButton" type="button" onclick="installApp()">📲 Install App</button>
     </div>
   </div>
 
@@ -1276,6 +1335,14 @@
     return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   }
 
+  function updateInstallButtons() {
+    const installed = isAppInstalled();
+    ['authInstallButton', 'trackerInstallButton'].forEach(id => {
+      const button = document.getElementById(id);
+      if (button) button.hidden = installed;
+    });
+  }
+
   function showInstallPrompt() {
     if (deferredInstallPrompt && !isAppInstalled() && !localStorage.getItem(INSTALL_DISMISSED_KEY)) {
       document.getElementById('installPrompt').classList.add('is-visible');
@@ -1288,12 +1355,22 @@
   }
 
   async function installApp() {
-    if (!deferredInstallPrompt) return;
+    if (!deferredInstallPrompt) {
+      const message = 'এই browser-এ direct install dialog পাওয়া যায়নি। Browser menu (⋮) থেকে “Install app” বা “Add to Home screen” নির্বাচন করুন।';
+      setAuthMessage(message);
+      const alertBox = document.getElementById('syncAlert');
+      if (alertBox) {
+        alertBox.className = 'sync-alert info';
+        alertBox.textContent = message;
+      }
+      return;
+    }
     deferredInstallPrompt.prompt();
     const choice = await deferredInstallPrompt.userChoice;
     if (choice.outcome === 'accepted') localStorage.removeItem(INSTALL_DISMISSED_KEY);
     deferredInstallPrompt = null;
     document.getElementById('installPrompt').classList.remove('is-visible');
+    updateInstallButtons();
   }
 
   async function apiRequest(action, payload = {}) {
@@ -1829,15 +1906,18 @@
   window.addEventListener('beforeinstallprompt', event => {
     event.preventDefault();
     deferredInstallPrompt = event;
+    updateInstallButtons();
     showInstallPrompt();
   });
   window.addEventListener('appinstalled', () => {
     deferredInstallPrompt = null;
     document.getElementById('installPrompt').classList.remove('is-visible');
+    updateInstallButtons();
   });
   window.addEventListener('DOMContentLoaded', () => {
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(console.error);
     bootApp();
+    updateInstallButtons();
     setTimeout(showInstallPrompt, 700);
   });
 </script>
