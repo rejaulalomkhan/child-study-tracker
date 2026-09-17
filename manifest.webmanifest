@@ -1,6 +1,6 @@
 {
-  "name": "Arians Study Tracker",
-  "short_name": "Arians Study",
+  "name": "Child Study Tracker",
+  "short_name": "Child Study",
   "description": "Student study progress tracker",
   "start_url": "./index.html",
   "display": "standalone",

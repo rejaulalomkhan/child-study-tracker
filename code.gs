@@ -48,6 +48,8 @@ function registerStudent_(request) {
   const sheetName = uniqueSheetName_(ss, name);
   const now = new Date();
   registry.appendRow([studentId, name, phone, startMonth, endMonth, sheetName, now, now]);
+  const registryRow = registry.getLastRow();
+  registry.getRange(registryRow, 3, 1, 3).setNumberFormat('@').setValues([[phone, startMonth, endMonth]]);
 
   const studentSheet = ss.insertSheet(sheetName);
   studentSheet.getRange(1, 1, 1, STUDENT_HEADERS.length).setValues([STUDENT_HEADERS]);
@@ -121,7 +123,7 @@ function studentFromRow_(row) {
   return {
     studentId: String(row[0]),
     name: String(row[1]),
-    phone: String(row[2]),
+    phone: normalizePhone_(row[2]),
     startMonth: monthValue_(row[3]),
     endMonth: monthValue_(row[4]),
     sheetName: String(row[5])
@@ -151,7 +153,10 @@ function uniqueSheetName_(ss, name) {
 }
 
 function normalizePhone_(phone) {
-  return String(phone || '').replace(/[\s-]/g, '');
+  let digits = String(phone || '').replace(/\D/g, '');
+  if (digits.indexOf('880') === 0) digits = '0' + digits.substring(3);
+  if (digits.length === 10 && digits.indexOf('1') === 0) digits = '0' + digits;
+  return digits;
 }
 
 function clean_(value) {

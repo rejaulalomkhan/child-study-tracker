@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arians-study-v1';
+const CACHE_NAME = 'arians-study-v2';
 const APP_SHELL = ['./', './index.html', './manifest.webmanifest'];
 
 self.addEventListener('install', event => {

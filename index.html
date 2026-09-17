@@ -572,11 +572,45 @@
       cursor: pointer;
     }
 
+    .auth-submit:disabled {
+      cursor: wait;
+      opacity: 0.78;
+    }
+
+    .button-spinner,
+    .inline-spinner {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: -3px;
+    }
+
+    .button-spinner {
+      display: none;
+      margin-right: 8px;
+    }
+
+    .auth-submit.is-loading .button-spinner {
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
     .auth-message {
       min-height: 20px;
       color: #b91c1c;
       font-size: 12px;
       font-weight: 600;
+    }
+
+    .auth-message.loading {
+      color: var(--accent-blue);
     }
 
     .student-bar {
@@ -965,14 +999,14 @@
       <label>End month
         <input id="endMonthInput" type="month" required value="2026-09">
       </label>
-      <button class="auth-submit" type="submit">Register student</button>
+      <button class="auth-submit" id="registerSubmit" type="submit"><span class="button-spinner" aria-hidden="true"></span><span class="button-label">Register student</span></button>
     </form>
 
     <form class="auth-form" id="loginForm" onsubmit="searchStudents(event)">
       <label>Guardian phone number
         <input id="loginPhoneInput" type="tel" required maxlength="20" autocomplete="tel" placeholder="01XXXXXXXXX">
       </label>
-      <button class="auth-submit" type="submit">Find students</button>
+      <button class="auth-submit" id="loginSubmit" type="submit"><span class="button-spinner" aria-hidden="true"></span><span class="button-label">Find students</span></button>
       <div id="studentResults" class="student-results"></div>
     </form>
     <div id="authMessage" class="auth-message" role="alert"></div>
@@ -1126,11 +1160,35 @@
   }
 
   function setAuthMessage(message) {
-    document.getElementById('authMessage').textContent = message;
+    const messageBox = document.getElementById('authMessage');
+    messageBox.classList.remove('loading');
+    messageBox.textContent = message;
+  }
+
+  function setAuthLoading(message) {
+    const messageBox = document.getElementById('authMessage');
+    messageBox.classList.add('loading');
+    messageBox.innerHTML = `<span class="inline-spinner" aria-hidden="true"></span> ${message}`;
+  }
+
+  function setFormLoading(formId, loading) {
+    const form = document.getElementById(formId);
+    const button = form.querySelector('.auth-submit');
+    button.disabled = loading;
+    button.classList.toggle('is-loading', loading);
+    form.setAttribute('aria-busy', loading);
   }
 
   function normalizePhone(phone) {
-    return phone.replace(/[\s-]/g, '');
+    let digits = String(phone || '').replace(/\D/g, '');
+    if (digits.startsWith('880')) digits = `0${digits.slice(3)}`;
+    if (digits.length === 10 && digits.startsWith('1')) digits = `0${digits}`;
+    return digits;
+  }
+
+  function clearAuthLoading(formId) {
+    setFormLoading(formId, false);
+    document.getElementById('authMessage').classList.remove('loading');
   }
 
   function openStudent(student, progress = []) {
@@ -1187,7 +1245,8 @@
 
   async function registerStudent(event) {
     event.preventDefault();
-    setAuthMessage('Registration হচ্ছে...');
+    setFormLoading('registerForm', true);
+    setAuthLoading('Registration হচ্ছে...');
     const student = {
       name: document.getElementById('studentNameInput').value.trim(),
       phone: normalizePhone(document.getElementById('guardianPhoneInput').value),
@@ -1214,13 +1273,16 @@
       } else {
         setAuthMessage(`Registration ব্যর্থ: ${error.message}`);
       }
+    } finally {
+      clearAuthLoading('registerForm');
     }
   }
 
   async function searchStudents(event) {
     event.preventDefault();
     const phone = normalizePhone(document.getElementById('loginPhoneInput').value);
-    setAuthMessage('Student খোঁজা হচ্ছে...');
+    setFormLoading('loginForm', true);
+    setAuthLoading('Student খোঁজা হচ্ছে...');
     document.getElementById('studentResults').innerHTML = '';
     try {
       const result = await apiRequest('students', { phone });
@@ -1240,6 +1302,8 @@
       });
     } catch (error) {
       setAuthMessage(`Search ব্যর্থ: ${error.message}`);
+    } finally {
+      clearAuthLoading('loginForm');
     }
   }
 
