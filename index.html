@@ -13,6 +13,11 @@
   <link rel="apple-touch-icon" href="icon-192.svg">
   <meta name="theme-color" content="#152c5b">
   <meta name="mobile-web-app-capable" content="yes">
+  <script>
+    if (location.protocol === 'http:' && !['localhost', '127.0.0.1'].includes(location.hostname)) {
+      location.replace(`https://${location.host}${location.pathname}${location.search}${location.hash}`);
+    }
+  </script>
 
   <style>
     :root {
@@ -616,15 +621,23 @@
       font-size: 13px;
     }
 
+    .auth-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
     .auth-mode {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4px;
       padding: 4px;
+      margin-bottom: 20px;
       border: 1px solid var(--border-color);
       border-radius: 9px;
       background: #f8fafc;
-      margin-bottom: 20px;
     }
 
     .auth-mode button {
@@ -645,28 +658,20 @@
       box-shadow: 0 1px 4px rgba(15, 23, 42, 0.1);
     }
 
-    .auth-mode #registerModeButton {
-      border: 1px solid #93c5fd;
-      background: #eff6ff;
+    .student-register-link {
+      padding: 8px 0;
+      border: 0;
+      background: transparent;
       color: var(--primary-blue);
-      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.14);
-      animation: registrationAttention 3s ease-out 2;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
-    .auth-mode #registerModeButton:hover,
-    .auth-mode #registerModeButton.active {
-      background: var(--primary-blue);
-      color: #ffffff;
-      border-color: var(--primary-blue);
-    }
-
-    @keyframes registrationAttention {
-      0%, 100% { transform: translateX(0); }
-      12% { transform: translateX(2px); }
-      24% { transform: translateX(-2px); }
-      36% { transform: translateX(1px); }
-      48% { transform: translateX(0); }
-    }
+    .student-register-link:hover { color: #1e3a8a; }
 
     .auth-form {
       display: grid;
@@ -1161,7 +1166,6 @@
       <button type="button" id="loginModeButton" class="active" role="tab" aria-selected="true" onclick="showAuthMode('login')">Existing student</button>
       <button type="button" id="registerModeButton" role="tab" aria-selected="false" onclick="showAuthMode('register')">New registration</button>
     </div>
-
     <form class="auth-form" id="registerForm" onsubmit="registerStudent(event)" hidden>
       <label>Student name
         <input id="studentNameInput" type="text" required maxlength="80" autocomplete="name" placeholder="Student-এর নাম">
@@ -1185,9 +1189,12 @@
       <button class="auth-submit" id="loginSubmit" type="submit"><span class="button-spinner" aria-hidden="true"></span><span class="button-label">Find students</span></button>
       <div id="studentResults" class="student-results"></div>
     </form>
-    <button class="install-app-button auth-install-button" id="authInstallButton" type="button" onclick="installApp()">
-      <span aria-hidden="true">📲</span> Install App
-    </button>
+    <div class="auth-actions">
+      <button class="install-app-button" id="authInstallButton" type="button" onclick="installApp()">
+        <span aria-hidden="true">📲</span> Install App
+      </button>
+       <button class="student-register-link" id="studentRegisterBottom" type="button" onclick="showAuthMode('register')">Student Register</button>
+    </div>
     <div id="authMessage" class="auth-message" role="alert"></div>
   </div>
 </section>
@@ -1390,10 +1397,13 @@
     const register = mode === 'register';
     document.getElementById('registerForm').hidden = !register;
     document.getElementById('loginForm').hidden = register;
-    document.getElementById('registerModeButton').classList.toggle('active', register);
-    document.getElementById('loginModeButton').classList.toggle('active', !register);
-    document.getElementById('registerModeButton').setAttribute('aria-selected', register);
-    document.getElementById('loginModeButton').setAttribute('aria-selected', !register);
+     document.getElementById('loginModeButton').classList.toggle('active', !register);
+     document.getElementById('registerModeButton').classList.toggle('active', register);
+     document.getElementById('loginModeButton').setAttribute('aria-selected', !register);
+     document.getElementById('registerModeButton').setAttribute('aria-selected', register);
+     const bottomButton = document.getElementById('studentRegisterBottom');
+     bottomButton.textContent = register ? 'Existing student' : 'Student Register';
+     bottomButton.onclick = () => showAuthMode(register ? 'login' : 'register');
     document.getElementById('authMessage').textContent = '';
   }
 
